@@ -6,32 +6,61 @@ interface Skill {
   name: string;
   type: 'frontend' | 'backend' | 'database' | 'tool';
   level: number;
-  color: string;
   description: string;
 }
 
 const skills: Skill[] = [
-  { name: 'React', type: 'frontend', level: 90, color: 'badge-primary', description: 'Building interactive UIs with React and its ecosystem' },
-  { name: 'TypeScript', type: 'frontend', level: 85, color: 'badge-secondary', description: 'Type-safe JavaScript development' },
-  { name: 'Tailwind CSS', type: 'frontend', level: 90, color: 'badge-accent', description: 'Utility-first CSS framework' },
-  { name: 'Next.js', type: 'frontend', level: 80, color: 'badge-primary', description: 'React framework for production' },
-  { name: 'Node.js', type: 'backend', level: 75, color: 'badge-secondary', description: 'JavaScript runtime for server-side applications' },
-  { name: 'Laravel', type: 'backend', level: 70, color: 'badge-accent', description: 'PHP web application framework' },
-  { name: 'Flask', type: 'backend', level: 65, color: 'badge-primary', description: 'Lightweight Python web framework' },
-  { name: 'MongoDB', type: 'database', level: 75, color: 'badge-secondary', description: 'NoSQL database for modern applications' },
-  { name: 'MySQL', type: 'database', level: 80, color: 'badge-accent', description: 'Relational database management system' },
-  { name: 'Git', type: 'tool', level: 85, color: 'badge-primary', description: 'Version control system' },
-  { name: 'Docker', type: 'tool', level: 70, color: 'badge-secondary', description: 'Containerization platform' },
-  { name: 'Figma', type: 'tool', level: 80, color: 'badge-accent', description: 'UI/UX design tool' },
+  { name: 'React', type: 'frontend', level: 90, description: 'Building interactive UIs with React and its ecosystem' },
+  { name: 'TypeScript', type: 'frontend', level: 85, description: 'Type-safe JavaScript development' },
+  { name: 'Tailwind CSS', type: 'frontend', level: 90, description: 'Utility-first CSS framework' },
+  { name: 'Next.js', type: 'frontend', level: 80, description: 'React framework for production' },
+  { name: 'Node.js', type: 'backend', level: 75, description: 'JavaScript runtime for server-side applications' },
+  { name: 'Laravel', type: 'backend', level: 70, description: 'PHP web application framework' },
+  { name: 'Flask', type: 'backend', level: 65, description: 'Lightweight Python web framework' },
+  { name: 'MongoDB', type: 'database', level: 75, description: 'NoSQL database for modern applications' },
+  { name: 'MySQL', type: 'database', level: 80, description: 'Relational database management system' },
+  { name: 'Git', type: 'tool', level: 85, description: 'Version control system' },
+  { name: 'Docker', type: 'tool', level: 70, description: 'Containerization platform' },
+  { name: 'Figma', type: 'tool', level: 80, description: 'UI/UX design tool' },
 ];
 
 const technologies = [
   'HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Vue.js', 'Angular', 'Next.js', 'Gatsby', 'Node.js', 'Express', 'Laravel', 'Django', 'Flask', 'Spring Boot'
 ];
 
+// Soft color classes for badges
+const softColorClasses = [
+  'badge-softGreen',
+  'badge-softYellow',
+  'badge-softOrange',
+  'badge-softPurple',
+  'badge-softPink',
+  'badge-softPeach',
+  'badge-softBlue',
+  'badge-softGray'
+];
+
+// Function to get a random color class
+const getRandomColorClass = () => {
+  const randomIndex = Math.floor(Math.random() * softColorClasses.length);
+  return softColorClasses[randomIndex];
+};
+
+// Create a color map to ensure consistent colors for the same technology/skill
+const createColorMap = (items: string[]) => {
+  return items.reduce((map, item) => {
+    map[item] = getRandomColorClass();
+    return map;
+  }, {} as Record<string, string>);
+};
+
 const TechStack = () => {
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  
+  // Create color maps for technologies and skills
+  const [techColorMap] = useState(() => createColorMap(technologies));
+  const [skillColorMap] = useState(() => createColorMap(skills.map(skill => skill.name)));
 
   return (
     <section id="skills" className="py-20 px-6 lg:px-20 bg-[#edeee9]">
@@ -42,7 +71,7 @@ const TechStack = () => {
         <div className="relative overflow-hidden py-4">
           <div className="flex whitespace-nowrap animate-slide-marquee-left">
             {[...technologies, ...technologies].map((tech, i) => (
-              <div key={`${tech}-${i}`} className="mx-4 skill-badge badge-primary">
+              <div key={`${tech}-${i}`} className={`mx-4 skill-badge ${techColorMap[tech]}`}>
                 {tech}
               </div>
             ))}
@@ -59,7 +88,7 @@ const TechStack = () => {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div 
-                      className={`mx-4 skill-badge ${skill.color}`}
+                      className={`mx-4 skill-badge ${skillColorMap[skill.name]}`}
                       onMouseEnter={() => setActiveTooltip(skill.name)}
                       onMouseLeave={() => setActiveTooltip(null)}
                     >

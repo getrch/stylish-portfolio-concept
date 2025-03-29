@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
@@ -66,6 +67,38 @@
   
   .badge-accent {
     @apply bg-accent/10 text-accent;
+  }
+
+  .badge-softGreen {
+    @apply bg-[#F2FCE2] text-[#4B7F52];
+  }
+
+  .badge-softYellow {
+    @apply bg-[#FEF7CD] text-[#917E12];
+  }
+
+  .badge-softOrange {
+    @apply bg-[#FEC6A1] text-[#A0530F];
+  }
+
+  .badge-softPurple {
+    @apply bg-[#E5DEFF] text-[#5B40BC];
+  }
+
+  .badge-softPink {
+    @apply bg-[#FFDEE2] text-[#B54A59];
+  }
+
+  .badge-softPeach {
+    @apply bg-[#FDE1D3] text-[#B06443];
+  }
+
+  .badge-softBlue {
+    @apply bg-[#D3E4FD] text-[#3B6FC7];
+  }
+
+  .badge-softGray {
+    @apply bg-[#F1F0FB] text-[#5F5D7A];
   }
 
   .skill-badge {

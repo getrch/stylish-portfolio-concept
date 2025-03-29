@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Github, ArrowRight, ExternalLink } from "lucide-react";
@@ -87,11 +87,37 @@ const projects: Project[] = [
   }
 ];
 
+// Soft color classes for badges
+const softColorClasses = [
+  'badge-softGreen',
+  'badge-softYellow',
+  'badge-softOrange',
+  'badge-softPurple',
+  'badge-softPink',
+  'badge-softPeach',
+  'badge-softBlue',
+  'badge-softGray'
+];
+
+// Function to get a random color class
+const getRandomColorClass = () => {
+  const randomIndex = Math.floor(Math.random() * softColorClasses.length);
+  return softColorClasses[randomIndex];
+};
+
 const Projects = () => {
   const [filter, setFilter] = useState<string | null>(null);
   
   // Get all unique technologies
   const allTechnologies = [...new Set(projects.flatMap(project => project.technologies))].sort();
+  
+  // Create a color map to ensure consistent colors for the same technology
+  const techColorMap = useMemo(() => {
+    return allTechnologies.reduce((map, tech) => {
+      map[tech] = getRandomColorClass();
+      return map;
+    }, {} as Record<string, string>);
+  }, [allTechnologies]);
   
   // Filter projects based on selected technology
   const filteredProjects = filter 
@@ -142,9 +168,9 @@ const Projects = () => {
                   <p className="text-sm text-primary/70 flex-1">{project.description.substring(0, 100)}...</p>
                   <div className="flex flex-wrap gap-2 mt-4">
                     {project.technologies.slice(0, 3).map((tech) => (
-                      <span key={tech} className="badge badge-primary">{tech}</span>
+                      <span key={tech} className={`badge ${techColorMap[tech]}`}>{tech}</span>
                     ))}
-                    {project.technologies.length > 3 && <span className="badge badge-secondary">+{project.technologies.length - 3}</span>}
+                    {project.technologies.length > 3 && <span className="badge badge-softGray">+{project.technologies.length - 3}</span>}
                   </div>
                 </div>
               </div>
@@ -170,7 +196,7 @@ const Projects = () => {
                     <h4 className="text-lg font-semibold mb-2">Technologies Used</h4>
                     <div className="flex flex-wrap gap-2 mb-6">
                       {project.technologies.map((tech) => (
-                        <span key={tech} className="badge badge-primary">{tech}</span>
+                        <span key={tech} className={`badge ${techColorMap[tech]}`}>{tech}</span>
                       ))}
                     </div>
                     
