@@ -41,11 +41,11 @@ const Header = () => {
       
       <div className={`w-full lg:w-1/2 flex justify-center items-center ${isVisible ? 'animate-fade-in' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
         <div className="relative">
-          <div className="absolute -inset-1 bg-gradient-to-r from-accent to-primary rounded-full blur opacity-30"></div>
+          <div className="absolute -inset-1 bg-gradient-to-r from-accent to-primary rounded-lg blur opacity-30"></div>
           <img
             src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=600&q=80"
             alt="John Developer"
-            className="relative w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-4 border-white shadow-xl"
+            className="relative w-64 h-64 md:w-80 md:h-80 object-cover rounded-lg border-4 border-white shadow-xl"
           />
         </div>
       </div>

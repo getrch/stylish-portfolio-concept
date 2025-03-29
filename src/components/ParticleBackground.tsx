@@ -35,11 +35,7 @@ const ParticleBackground = () => {
             value: "#536162",
           },
           links: {
-            color: "#536162",
-            distance: 150,
-            enable: true,
-            opacity: 0.3,
-            width: 1,
+            enable: false, // Disabled the links between particles
           },
           move: {
             direction: "none",
