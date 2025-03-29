@@ -1,12 +1,31 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useEffect } from "react";
+import Navbar from "@/components/Navbar";
+import ParticleBackground from "@/components/ParticleBackground";
+import Header from "@/components/Header";
+import TechStack from "@/components/TechStack";
+import Projects from "@/components/Projects";
+import Experience from "@/components/Experience";
+import Certificates from "@/components/Certificates";
+import Footer from "@/components/Footer";
 
 const Index = () => {
+  useEffect(() => {
+    document.title = "John Developer | Web Developer Portfolio";
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="relative min-h-screen">
+      <ParticleBackground />
+      <Navbar />
+      <Header />
+      <main>
+        <TechStack />
+        <Projects />
+        <Experience />
+        <Certificates />
+      </main>
+      <Footer />
     </div>
   );
 };
