@@ -1,6 +1,6 @@
 
 import { useRef, useState } from "react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 
 interface Skill {
   name: string;
@@ -84,29 +84,39 @@ const TechStack = () => {
         <div className="relative overflow-hidden py-4">
           <div className="flex whitespace-nowrap animate-slide-marquee-right">
             {[...skills, ...skills].map((skill, i) => (
-              <TooltipProvider key={`${skill.name}-${i}`}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <div 
-                      className={`mx-4 skill-badge ${skillColorMap[skill.name]}`}
-                      onMouseEnter={() => setActiveTooltip(skill.name)}
-                      onMouseLeave={() => setActiveTooltip(null)}
-                    >
-                      {skill.name}
+              <HoverCard key={`${skill.name}-${i}`} openDelay={200} closeDelay={100}>
+                <HoverCardTrigger asChild>
+                  <div 
+                    className={`mx-4 skill-badge ${skillColorMap[skill.name]} cursor-pointer`}
+                    onMouseEnter={() => setActiveTooltip(skill.name)}
+                    onMouseLeave={() => setActiveTooltip(null)}
+                  >
+                    {skill.name}
+                  </div>
+                </HoverCardTrigger>
+                <HoverCardContent 
+                  className="w-80 p-4 z-[100] border border-border/50 bg-popover shadow-lg"
+                  side="top"
+                  align="center"
+                  sideOffset={5}
+                >
+                  <div className="space-y-2">
+                    <h4 className="font-semibold">{skill.name}</h4>
+                    <p className="text-sm text-muted-foreground">{skill.description}</p>
+                    <div className="mt-2">
+                      <div className="text-xs text-muted-foreground mb-1">
+                        Proficiency: {skill.level}%
+                      </div>
+                      <div className="h-2 w-full bg-gray-200 rounded-full">
+                        <div 
+                          className="h-full rounded-full bg-accent"
+                          style={{ width: `${skill.level}%` }}  
+                        ></div>
+                      </div>
                     </div>
-                  </TooltipTrigger>
-                  <TooltipContent className="p-3 max-w-xs">
-                    <p className="font-medium text-sm">{skill.name}</p>
-                    <p className="text-xs text-muted-foreground">{skill.description}</p>
-                    <div className="h-1.5 w-full bg-gray-200 rounded-full mt-2">
-                      <div 
-                        className="h-full rounded-full bg-accent"
-                        style={{ width: `${skill.level}%` }}  
-                      ></div>
-                    </div>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
             ))}
           </div>
         </div>
