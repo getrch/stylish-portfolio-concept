@@ -22,7 +22,7 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#" },
+    { name: "Home", href: "#home" },
     { name: "Skills", href: "#skills" },
     { name: "Projects", href: "#projects" },
     { name: "Experience", href: "#experience" },
@@ -52,7 +52,14 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <a href="#" className="text-2xl font-bold text-primary">
+          <a 
+            href="#home" 
+            className="text-2xl font-bold text-primary"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("#home");
+            }}
+          >
             John<span className="text-accent">Dev</span>
           </a>
 

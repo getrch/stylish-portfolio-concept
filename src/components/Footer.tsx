@@ -3,7 +3,7 @@ import { Github, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary text-white py-12 px-6 lg:px-20">
+    <footer id="contact" className="bg-secondary text-white py-12 px-6 lg:px-20">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-center md:text-left">
