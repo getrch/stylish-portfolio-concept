@@ -1,8 +1,7 @@
-
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Github, ArrowRight, ExternalLink } from "lucide-react";
+import { Github } from "lucide-react";
 
 interface Project {
   id: number;
@@ -11,7 +10,6 @@ interface Project {
   image: string;
   additionalImages: string[];
   technologies: string[];
-  liveUrl?: string;
   repoUrl?: string;
   category: string;
 }
@@ -87,7 +85,6 @@ const projects: Project[] = [
   }
 ];
 
-// Soft color classes for badges
 const softColorClasses = [
   'badge-softGreen',
   'badge-softYellow',
@@ -99,7 +96,6 @@ const softColorClasses = [
   'badge-softGray'
 ];
 
-// Function to get a random color class
 const getRandomColorClass = () => {
   const randomIndex = Math.floor(Math.random() * softColorClasses.length);
   return softColorClasses[randomIndex];
@@ -108,10 +104,8 @@ const getRandomColorClass = () => {
 const Projects = () => {
   const [filter, setFilter] = useState<string | null>(null);
   
-  // Get all unique technologies
   const allTechnologies = [...new Set(projects.flatMap(project => project.technologies))].sort();
   
-  // Create a color map to ensure consistent colors for the same technology
   const techColorMap = useMemo(() => {
     return allTechnologies.reduce((map, tech) => {
       map[tech] = getRandomColorClass();
@@ -119,7 +113,6 @@ const Projects = () => {
     }, {} as Record<string, string>);
   }, [allTechnologies]);
   
-  // Filter projects based on selected technology
   const filteredProjects = filter 
     ? projects.filter(project => project.technologies.includes(filter))
     : projects;
@@ -201,11 +194,6 @@ const Projects = () => {
                     </div>
                     
                     <div className="flex space-x-4 mt-6">
-                      {project.liveUrl && (
-                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                          Live Demo <ExternalLink size={16} />
-                        </a>
-                      )}
                       {project.repoUrl && (
                         <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
                           Source Code <Github size={16} />
