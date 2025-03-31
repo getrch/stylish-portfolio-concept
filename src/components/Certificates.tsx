@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface Certificate {
   id: number;
@@ -97,11 +98,13 @@ const Certificates = () => {
                 <DialogTrigger asChild>
                   <div className="project-card cursor-pointer">
                     <div className="h-40 overflow-hidden">
-                      <img 
-                        src={cert.image} 
-                        alt={cert.name} 
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                      />
+                      <AspectRatio ratio={4/3} className="w-full h-full">
+                        <img 
+                          src={cert.image} 
+                          alt={cert.name} 
+                          className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110"
+                        />
+                      </AspectRatio>
                     </div>
                     <div className="p-4">
                       <h3 className="text-lg font-semibold mb-1 text-primary">{cert.name}</h3>
@@ -120,11 +123,13 @@ const Certificates = () => {
                     <DialogTitle className="text-2xl">{cert.name}</DialogTitle>
                   </DialogHeader>
                   <div className="mt-4">
-                    <img 
-                      src={cert.image}
-                      alt={cert.name}
-                      className="w-full h-auto rounded-md shadow-md mb-4"
-                    />
+                    <AspectRatio ratio={16/9} className="w-full rounded-md shadow-md mb-4 overflow-hidden">
+                      <img 
+                        src={cert.image}
+                        alt={cert.name}
+                        className="w-full h-full object-cover object-center"
+                      />
+                    </AspectRatio>
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
                         <p className="font-semibold">Issuer</p>
@@ -155,11 +160,13 @@ const Certificates = () => {
                 <DialogTrigger asChild>
                   <div className="project-card cursor-pointer flex flex-col md:flex-row">
                     <div className="h-40 md:w-1/3 overflow-hidden">
-                      <img 
-                        src={award.image} 
-                        alt={award.name} 
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                      />
+                      <AspectRatio ratio={1/1} className="w-full h-full">
+                        <img 
+                          src={award.image} 
+                          alt={award.name} 
+                          className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110"
+                        />
+                      </AspectRatio>
                     </div>
                     <div className="p-4 md:w-2/3">
                       <h3 className="text-lg font-semibold mb-1 text-primary">{award.name}</h3>
@@ -179,11 +186,13 @@ const Certificates = () => {
                     <DialogTitle className="text-2xl">{award.name}</DialogTitle>
                   </DialogHeader>
                   <div className="mt-4">
-                    <img 
-                      src={award.image}
-                      alt={award.name}
-                      className="w-full h-auto rounded-md shadow-md mb-4"
-                    />
+                    <AspectRatio ratio={16/9} className="w-full rounded-md shadow-md mb-4 overflow-hidden">
+                      <img 
+                        src={award.image}
+                        alt={award.name}
+                        className="w-full h-full object-cover object-center"
+                      />
+                    </AspectRatio>
                     <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
                       <div>
                         <p className="font-semibold">Issuer</p>

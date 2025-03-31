@@ -1,7 +1,9 @@
+
 import React, { useState, useMemo } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface Project {
   id: number;
@@ -147,11 +149,13 @@ const Projects = () => {
             <DialogTrigger asChild>
               <div className="project-card cursor-pointer group">
                 <div className="h-48 overflow-hidden relative">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                  <AspectRatio ratio={16 / 9} className="w-full h-full">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </AspectRatio>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <p className="text-white font-medium">View Details</p>
                   </div>
@@ -173,12 +177,24 @@ const Projects = () => {
                 <DialogTitle className="text-2xl">{project.title}</DialogTitle>
                 <DialogDescription>
                   <div className="mt-6">
-                    <img src={project.image} alt={project.title} className="w-full h-64 object-cover rounded-md mb-4" />
+                    <AspectRatio ratio={16 / 9} className="w-full mb-4 overflow-hidden rounded-md">
+                      <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover object-center"
+                      />
+                    </AspectRatio>
                     
                     {project.additionalImages.length > 0 && (
                       <div className="grid grid-cols-2 gap-2 mb-4">
                         {project.additionalImages.map((img, i) => (
-                          <img key={i} src={img} alt={`${project.title} ${i+1}`} className="w-full h-32 object-cover rounded-md" />
+                          <AspectRatio key={i} ratio={16 / 9} className="overflow-hidden rounded-md">
+                            <img 
+                              src={img} 
+                              alt={`${project.title} ${i+1}`} 
+                              className="w-full h-full object-cover object-center"
+                            />
+                          </AspectRatio>
                         ))}
                       </div>
                     )}
